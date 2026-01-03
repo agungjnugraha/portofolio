@@ -4,265 +4,639 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ruang Karya - Agung J Nugraha</title>
+    <meta name="description" content="Portofolio Kreatif Agung J Nugraha">
 
-    <!-- ========= Google Fonts ========= -->
+    <!-- ========= Google Fonts (Modern Sans) ========= -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Inter+Tight:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     
     <!-- ========= AOS Library ========= -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
-    <!-- ========= Font Awesome untuk Ikon ========= -->
+    <!-- ========= Font Awesome ========= -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* ========= GLOBAL STYLES & VARIABEL ========= */
-        :root{--primary-color:#212529;--secondary-color:#495057;--background-color:#F8F9FA;--card-bg-color:#FFF;--text-color:#212529;--light-text-color:#6C757D;--very--light-text-color:#acb4bc;--border-color:#DEE2E6}
-        *{margin:0;padding:0;box-sizing:border-box}
-        html{scroll-behavior:smooth}
-      	a{text-decoration:none;color:var(--text-color)}
-        body{font-family:'Geist',sans-serif;background-color:var(--background-color);color:var(--text-color);font-size:15px;line-height:1.6;overflow-x:hidden;min-height:100vh}
-        .container{max-width:768px;margin:0 auto;padding:0 20px}
-        section{padding:100px 0}
-        h1,h2,h3,h4{font-family:'Inter Tight',sans-serif}
-        h2{font-size:2.5rem;font-weight:700;text-align:center;margin-bottom:10px;color:var(--text-color)}
-      	p.desch2{color:var(--light-text-color)}
+        /* ========= DESIGN SYSTEM: LIGHT, CLEAN & TECH ========= */
+        :root {
+            --bg-color: #ffffff;
+            --bg-secondary: #f8fafc; 
+            --text-main: #111827; 
+            --text-muted: #64748b; 
+            --accent: #2563EB; 
+            --accent-glow: rgba(37, 99, 235, 0.15);
+            --card-bg: #ffffff;
+            --card-border: #e2e8f0;
+            --font-main: 'Inter Tight', sans-serif;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-hover: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        html { scroll-behavior: smooth; }
+        
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-size: 16px;
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+            cursor: none; /* Sembunyikan kursor asli di Desktop */
+        }
+
+        /* ========= BACKGROUND PATTERN (DOT GRID) ========= */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: radial-gradient(#e2e8f0 1.5px, transparent 1.5px);
+            background-size: 30px 30px; /* Jarak antar titik */
+            z-index: -1;
+            pointer-events: none;
+            opacity: 0.6;
+        }
+
+        /* ========= CUSTOM CURSOR FIX ========= */
+        .cursor-dot,
+        .cursor-outline {
+            position: fixed;
+            top: 0; left: 0;
+            width: 8px; height: 8px;
+            background-color: var(--text-main);
+            border-radius: 50%;
+            z-index: 9999;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+        }
+
+        .cursor-outline {
+            width: 40px; height: 40px;
+            background-color: transparent;
+            border: 1px solid var(--text-muted);
+            transition: transform 0.1s linear, width 0.3s, height 0.3s, background-color 0.3s;
+            opacity: 1;
+        }
+
+        /* Ambient Background (Blur Circle) */
+        .ambient-light {
+            position: fixed;
+            width: 600px; height: 600px;
+            background: radial-gradient(circle, var(--accent-glow) 0%, rgba(255,255,255,0) 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: -1;
+            transform: translate(-50%, -50%);
+            filter: blur(80px);
+            transition: opacity 1s ease;
+        }
+
+        a { text-decoration: none; color: inherit; position: relative; }
+
+        .container {
+            width: 100%;
+            max-width: 1000px; 
+            margin: 0 auto;
+            padding: 0 24px;
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+
+        /* Typography */
+        h1 {
+            font-family: var(--font-main);
+            font-weight: 800; 
+            font-size: clamp(2.5rem, 6vw, 4rem); 
+            line-height: 1.1;
+            margin-bottom: 10px;
+            letter-spacing: -0.02em; 
+            color: var(--text-main);
+        }
+
+        h2 { 
+            font-family: var(--font-main); 
+            font-weight: 800; 
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            margin-bottom: 2rem;
+            letter-spacing: -0.01em; 
+            color: var(--text-main);
+        }
+
+        /* TYPING EFFECT STYLE */
+        .typing-container {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: clamp(1.2rem, 3vw, 1.25rem);
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 25px;
+            min-height: 1.6em;
+            background: var(--bg-secondary);
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 4px;
+            box-shadow: inset 0 2px 4px 0 rgba(0,0,0,0.05);
+        }
+
+        .typing-cursor {
+            display: inline-block;
+            width: 2px;
+            background-color: var(--accent);
+            animation: blink 1s step-end infinite;
+            margin-left: 2px;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        p {
+            color: var(--text-muted);
+            margin-bottom: 30px;
+            font-weight: 400;
+            font-size: 1rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        b { color: var(--text-main); font-weight: 700; }
 
         /* ========= HERO SECTION ========= */
-        #hero{height:100vh;display:flex;align-items:center;padding:60px 0}
-        #hero .container{display:flex;flex-direction:column;gap:0;align-items:center;height:100%;justify-content: space-evenly;text-align:center}
-        .hero-img-wrapper{position:relative;width:100%;overflow:hidden;border-radius:10px;box-shadow:0 25px 50px -12px #00000040}
-        .hero-img{width:100%;height:100%;filter: grayscale(50%);object-fit:cover}
-        .hero-content h1{font-size:3.5rem;font-weight:700;color:var(--text-color);line-height:1.1;margin-bottom:20px;letter-spacing:-.04em}
-        .hero-content h1 span,h2 span{color:#acb4bc!important}
-      	img.upper{width:35px;vertical-align:top;margin-right:10px}
-        .hero-content p{font-size:1.1rem;margin-bottom:30px}
-        .btn-cv{display:inline-block;background:var(--primary-color);color:#fff;padding:15px 35px;border-radius:50px;text-decoration:none;font-weight:500;transition:all .3s ease;box-shadow:0 10px 20px #0003}
-        .btn-cv:hover{transform:translateY(-5px);background:var(--secondary-color);box-shadow:0 15px 30px #0000004d}
-      
-      	/* ========= HERO SOCIAL LINKS ========= */
-        .hero-social-links{margin-bottom:25px;display:flex;justify-content:center;gap:20px}
-        .hero-social-links a{color:var(--light-text-color);font-size:1.8rem;transition:all .3s ease}
-        .hero-social-links a:hover{color:var(--primary-color);transform:translateY(-5px)}
+        #hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 80px 0; 
+        }
 
-        /* ========= ABOUT SECTION ========= */
-        #about{background-color:var(--card-bg-color)}
-        #about .container{text-align:center}
-        .about-text p{color:var(--light-text-color);font-size:1rem;line-height:1.8}
+        .hero-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+        }
+
+        /* Social Icons - Text Based */
+        .hero-social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap; 
+            margin: 10px 0;
+        }
+
+        .hero-social-links a {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            transition: var(--transition);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+            border: 1px solid transparent;
+            padding: 8px 16px;
+            border-radius: 50px;
+            cursor: pointer; 
+        }
+
+        .hero-social-links a:hover {
+            color: var(--bg-color);
+            background-color: var(--text-main);
+            border-color: var(--text-main);
+        }
+
+        /* Elegant Button */
+        .btn-elegant {
+            display: inline-block;
+            padding: 16px 40px;
+            background-color: var(--text-main);
+            color: #fff;
+            font-family: var(--font-main);
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            transition: var(--transition);
+            border-radius: 8px; 
+            box-shadow: var(--shadow-md);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .btn-elegant:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+            background-color: var(--accent);
+        }
+
+        /* Image Frame */
+        .hero-img-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 450px;
+            border-radius: 12px; 
+            overflow: hidden;
+            box-shadow: var(--shadow-hover);
+            transition: var(--transition);
+            border: 8px solid #fff; 
+            cursor: pointer;
+            background: #fff;
+        }
+
+        .hero-img-wrapper:hover {
+            transform: scale(1.02);
+        }
+
+        .hero-img {
+            width: 100%;
+            height: auto;
+            display: block;
+            filter: grayscale(100%);
+            transition: filter 0.6s ease;
+        }
+
+        .hero-img-wrapper:hover .hero-img { filter: grayscale(0%); }
 
         /* ========= PORTFOLIO SECTION ========= */
-        #portfolio{text-align:center;background-color:var(--background-color)}
-        .filter-buttons{margin:30px 0 50px;display:flex;justify-content:center;flex-wrap:wrap;gap:10px}
-        .filter-btn{background:transparent;border:none;color:var(--light-text-color);padding:8px 20px;border-radius:7px;cursor:pointer;font-size:1rem;font-family: 'Geist',sans-serif;font-weight:400;transition:all .3s ease}
-      	.filter-btn.active,.filter-btn:focus{background:var(--primary-color);color:#fff}
-        .filter-btn:hover{background:var(--border-color);color:var(--primary-color);border-color:var(--primary-color)}
-        .portfolio-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:30px}
-        .portfolio-item{background:var(--card-bg-color);border-radius:10px;overflow:hidden;box-shadow:0 4px 15px #00000014;transition:transform .3s ease,box-shadow .3s ease;border:1px solid var(--border-color)}
-        .portfolio-item:hover{transform:translateY(-10px);box-shadow:0 12px 25px #0000001f}
-        .portfolio-item img{width:100%;height:240px;object-fit:cover;filter:grayscale(100%);transition:filter .3s ease}
-        .portfolio-item:hover img{filter:grayscale(0%)}
-        .portfolio-info{padding:25px;text-align:left}
-        .portfolio-info h3{font-size:1.4rem;font-weight:600}
-        .portfolio-info .category{display:inline-block;background:var(--background-color);border:1px solid var(--border-color);color:var(--primary-color);padding:5px 15px;border-radius:15px;margin-top:20px;font-size:.85rem;font-weight:500}
-      	.portfolio-info p{color:var(--light-text-color)}
+        #portfolio { padding: 80px 0; background-color: var(--bg-secondary); position: relative; z-index: 1; }
 
-        /* ========= FOOTER ========= */
-        footer{text-align:center;padding:40px 0}
-        .footer-container{width:100%;padding:0 20px}
-        footer .social-links a{color:var(--light-text-color);font-size:1.5rem;margin:0 15px;transition:color .3s ease}
-        footer .social-links a:hover{color:var(--text-color)}
-        footer p{margin-top:20px;font-size:.9rem;color:var(--light-text-color)}
+        /* Filter */
+        .filter-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+        }
 
-        /* ========= RESPONSIVE DESIGN ========= */
-      	@media (max-width: 1050px) {
-        .hero-img-wrapper{}
+        .filter-btn {
+            background: #fff;
+            border: 1px solid var(--card-border);
+            color: var(--text-muted);
+            font-family: var(--font-main);
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            padding: 8px 20px;
+            border-radius: 6px;
+            cursor: pointer;
         }
-        @media (max-width: 992px) {
-        #about .container{grid-template-columns:1fr;text-align:center;gap:40px}
-        .hero-content h1{font-size:2.8rem}
-        .hero-img-wrapper{}
+
+        .filter-btn:hover { 
+            border-color: var(--accent); 
+            color: var(--accent);
         }
-        @media (max-width: 576px) {
-        h2{font-size:2rem}
-        .hero-content h1{font-size:2.2rem}
-        section{padding:60px 0}
-        .portfolio-grid{grid-template-columns:1fr}
-        .hero-img-wrapper{height:230px}
+        .filter-btn.active { 
+            background-color: var(--accent); 
+            color: #fff; 
+            border-color: var(--accent);
+            box-shadow: var(--shadow-md);
+        }
+
+        /* Grid & Cards */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
+            gap: 30px;
+        }
+
+        .portfolio-item {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px; 
+            overflow: hidden;
+            transition: var(--transition);
+            box-shadow: var(--shadow-sm);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            text-align: left; 
+            cursor: pointer;
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--accent);
+        }
+
+        .portfolio-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            filter: grayscale(100%);
+            transition: transform 0.6s ease, filter 0.6s ease;
+        }
+
+        .portfolio-item:hover img {
+            transform: scale(1.05);
+            filter: grayscale(0%);
+        }
+
+        .portfolio-info {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .portfolio-info h3 {
+            font-family: var(--font-main);
+            font-size: 1.15rem;
+            margin-bottom: 8px;
+            color: var(--text-main);
+            font-weight: 700;
+        }
+
+        .portfolio-info p {
+            font-size: 0.85rem;
+            margin-bottom: 15px;
+            margin-left: 0;
+            margin-right: 0;
+        }
+
+        .category-tag {
+            align-self: flex-start;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            background: var(--bg-secondary);
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        .portfolio-item:hover .category-tag {
+            color: var(--accent);
+            background: rgba(37, 99, 235, 0.1);
+        }
+
+        /* Footer */
+        footer {
+            padding: 60px 0;
+            background-color: #fff;
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            border-top: 1px solid var(--card-border);
+            position: relative;
+            z-index: 2;
+        }
+        
+        footer a { color: var(--text-main); font-weight: 600; }
+
+        /* Responsive Mobile Overrides */
+        @media (max-width: 768px) {
+            /* Matikan Custom Cursor di HP */
+            .cursor-dot, .cursor-outline { display: none; }
+            body { cursor: auto; } 
+            
+            .container { padding: 0 20px; }
+            .hero-img-wrapper { max-width: 100%; }
+            .filter-btn { flex: 1 1 40%; font-size: 0.8rem; text-align: center;}
+            .filter-container { gap: 10px; }
+            .portfolio-grid { grid-template-columns: 1fr; }
+            .typing-container { width: 100%; text-align: center; font-size: 1rem; }
         }
     </style>
 </head>
 <body>
 
+    <!-- Custom Cursor Elements -->
+    <div class="cursor-dot" id="cursor-dot"></div>
+    <div class="cursor-outline" id="cursor-outline"></div>
+    <div class="ambient-light" id="ambient-light"></div>
+
     <!-- ========= HERO SECTION ========= -->
     <section id="hero">
         <div class="container">
-            <div class="hero-content" data-aos="fade-up">
-              <h1><img class="upper" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh07XwsBz7MPf8CHTqwRaHNo87Z87hEuIhnhq6RjXx1lKBQXDn0u7RbB7vEXjrfJVqN0b5sS7f-ZFEIaqVMavWjrT7-oOkSjKukv_BED-P_uq9zmHStnNyECVL2hayHR9p4ozQrlQ74bulOJqNGb1LggqIP0wlsWwUwkQBwLZXl-S81x5sr1SmAsP8qlDJc/s1600/a.png"/><span>Hallo, saya</span> Agung,<br/><span>seorang</span> Guru Biasa.</h1>
-                <p class="desc">Saya seorang yang selalu haus akan ilmu pengetahuan terutama dalam bidang <b>Teknologi</b>. Sekarang saya sedang menekuni <b>teknologi pembelajaran</b> berbasis GWE, Ai, GAS, dan Digitalisasi Pembelajaran.</p>
-            </div>
-          
-            <div class="hero-social-links" data-aos="fade-up" data-aos-delay="200">
-                <a href="https://www.instagram.com/agungjakanugraha" title="Instagram"><i class="fab fa-instagram"></i></a>
-                <a href="https://wa.me/6282233669690" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-                <a href="https://github.com/agungjnugraha" title="GitHub"><i class="fab fa-github"></i></a>
-                <a href="#" title="Pinterest"><i class="fab fa-pinterest"></i></a>
-                <a href="http://www.onizukartz.com" title="Website"><i class="fa-solid fa-globe"></i></a>
-            </div>
-            <div class="hero-img-wrapper" data-aos="fade-up" data-aos-delay="300">
-                <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjWoxTCsw1YoLM_lv3glW5eifj1h7MaOk3Vg56FTq2fBz8XxQoFcQtuc8abAVItixfsQRI7_Wtie2KtmSkn3oHh_FuPYgC0OE0iHLtrQfqxhvGjW6NnG4gEeikoruGI4gOatBw5Sbywu4wqj7tQukWIFDQoC2fSZqyR8QQrfgRspWjDdip3dzP3h-4_92P3/s1600/aq%20rajut.jpg" alt="Foto Profil" class="hero-img">
+            <div class="hero-wrapper">
+                
+                <!-- Teks -->
+                <div class="hero-content" data-aos="fade-up" data-aos-duration="1200">
+                    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh07XwsBz7MPf8CHTqwRaHNo87Z87hEuIhnhq6RjXx1lKBQXDn0u7RbB7vEXjrfJVqN0b5sS7f-ZFEIaqVMavWjrT7-oOkSjKukv_BED-P_uq9zmHStnNyECVL2hayHR9p4ozQrlQ74bulOJqNGb1LggqIP0wlsWwUwkQBwLZXl-S81x5sr1SmAsP8qlDJc/s1600/a.png" style="width:30px; vertical-align:middle; margin-bottom:20px; opacity:0.8;">
+                    <h1>Hallo, Saya <br><span style="color:var(--accent); display:block; margin-top:5px;">Agung.</span></h1>
+                    
+                    <!-- TYPING EFFECT -->
+                    <div class="typing-container">
+                        <b>Guru Biasa yang <span id="typing-text" class="typing-text"></span><span class="typing-cursor">|</span></b>
+                    </div>
+
+                    <p>
+                        Saya seorang yang selalu haus akan ilmu pengetahuan terutama dalam bidang <b>Teknologi</b>. Sekarang saya sedang menekuni <b>teknologi pembelajaran</b> berbasis GWE, Ai, GAS, dan Digitalisasi Pembelajaran.
+                    </p>
+                </div>
+                
+                <!-- Foto -->
+                <div class="hero-img-wrapper" data-aos="zoom-in" data-aos-duration="1500">
+                    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjWoxTCsw1YoLM_lv3glW5eifj1h7MaOk3Vg56FTq2fBz8XxQoFcQtuc8abAVItixfsQRI7_Wtie2KtmSkn3oHh_FuPYgC0OE0iHLtrQfqxhvGjW6NnG4gEeikoruGI4gOatBw5Sbywu4wqj7tQukWIFDQoC2fSZqyR8QQrfgRspWjDdip3dzP3h-4_92P3/s1600/aq%20rajut.jpg" alt="Foto Profil" class="hero-img">
+                </div>
+
+                <!-- Social Links (Disisipkan Kembali) -->
+                <div class="hero-social-links" data-aos="fade-up" data-aos-delay="150">
+                    <a href="https://www.instagram.com/agungjakanugraha">Instagram</a>
+                    <a href="https://wa.me/6282233669690">WhatsApp</a>
+                    <a href="https://github.com/agungjnugraha">GitHub</a>
+                    <a href="http://www.onizukartz.com">Website</a>
+                </div>
+                
+                <!-- Tombol -->
+                <a href="#portfolio" class="btn-elegant" data-aos="fade-up" data-aos-delay="300">
+                    Jelajahi Karya
+                </a>
+
+
             </div>
         </div>
     </section>
 
-    <!-- ========= RUANG KARYA SECTION ========= -->
+    <!-- ========= PORTFOLIO SECTION ========= -->
     <section id="portfolio">
         <div class="container">
-            <h2 data-aos="fade-up"><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 512 512"><path fill="#000000" fill-rule="evenodd" d="m256 34.347l192 110.851v221.703L256 477.752L64 366.901V145.198zm-64.001 206.918L192 391.536l42.667 24.635V265.899zM106.667 192v150.267l42.666 24.635V216.633zm233.324-59.894l-125.578 72.836L256 228.952l125.867-72.669zM256 83.614l-125.867 72.67l41.662 24.052l125.579-72.835z"/></svg> <span>Ruang</span> Karyaku</h2>
-          <p data-aos="fade-up" class="desch2">Semua aplikasi di bawah bersifat <b>GRATIS</b>. Silakan dipergunakan dengan sebaik-baiknya.<br/>Untuk info lebih lanjut silakan hubungi kami di: <a href="https://wa.me/6282233669690">+62 822 3366 9690</a></p>
+            <div style="margin-bottom: 50px;" data-aos="fade-up">
+                <h2>Ruang Karya</h2>
+                <p>Eksplorasi teknologi pendidikan. <b>Gratis</b> & Terbuka.</p>
+            </div>
             
-            <div class="filter-buttons" data-aos="fade-up" data-aos-delay="100">
+            <div class="filter-container" data-aos="fade-up" data-aos-delay="100">
                 <button class="filter-btn active" data-filter="all">All</button>
                 <button class="filter-btn" data-filter="edu_games">Edu Games</button>
                 <button class="filter-btn" data-filter="practice">Practice</button>
-                <button class="filter-btn" data-filter="app">App</button>
+                <button class="filter-btn" data-filter="app">Apps</button>
             </div>
 
             <div class="portfolio-grid">
-                <!-- Item 1: Edu Games -->
-                <div class="portfolio-item edu_games" data-aos="zoom-in" data-aos-delay="150">
-                    <img src="https://ajnugraha.carrd.co/assets/images/image02.jpg?v=f34bde93" alt="Project 1">
+                <!-- Item 1 -->
+                <div class="portfolio-item edu_games" data-category="edu_games" data-aos="fade-up" data-aos-delay="0">
+                    <img src="https://ajnugraha.carrd.co/assets/images/image02.jpg?v=f34bde93" alt="Who is My Family?">
                     <div class="portfolio-info">
+                        <span class="category-tag">Edu Games</span>
                         <h3>Who is My Family?</h3>
-                      <p>Mata Pelajaran: Bahasa Inggris<br/>Kelas/Fase: III/B<br/>Materi: My Family</p>
-                        <span class="category">Edu Games</span>
+                        <p>B. Inggris - Kelas III/B<br>Materi: My Family</p>
                     </div>
                 </div>
-                <!-- Item 2: Edu Games -->
-                <div class="portfolio-item edu_games" data-aos="zoom-in" data-aos-delay="200">
-                    <a href="https://script.google.com/a/macros/guru.sd.belajar.id/s/AKfycbyna09qZZ6M2KeQjaVHt-nSwmYoqTZwvecOg59uK7Ssta8YKlNSF_Tz19H0kiOWXe2A/exec" title="Energy Championship" target="_blank"><img src="https://ajnugraha.carrd.co/assets/images/image04.jpg?v=f34bde93" alt="Energy Championship"></a>
+                <!-- Item 2 -->
+                <div class="portfolio-item edu_games" data-category="edu_games" data-aos="fade-up" data-aos-delay="50">
+                    <a href="https://script.google.com/a/macros/guru.sd.belajar.id/s/AKfycbyna09qZZ6M2KeQjaVHt-nSwmYoqTZwvecOg59uK7Ssta8YKlNSF_Tz19H0kiOWXe2A/exec" title="Energy Championship" target="_blank">
+                        <img src="https://ajnugraha.carrd.co/assets/images/image04.jpg?v=f34bde93" alt="Energy Championship">
+                    </a>
                     <div class="portfolio-info">
+                        <span class="category-tag">Edu Games</span>
                         <h3>Energy Championship</h3>
-                      <p>Mata Pelajaran: IPAS<br/>Kelas/Fase: III/B<br/>Materi: Energi dan Sumber Energi</p>
-                        <span class="category">Edu Games</span>
+                        <p>IPAS - Kelas III/B<br>Energi dan Sumber Energi</p>
                     </div>
                 </div>
-                <!-- Item 3: Edu Games -->
-                <div class="portfolio-item edu_games" data-aos="zoom-in" data-aos-delay="300">
-                    <a href="https://ajnugraha.github.io/kuispanjangberat3/" title="F1 Race Math" target="_blank"><img src="https://ajnugraha.carrd.co/assets/images/image08.jpg?v=f34bde93" alt="F1 Race Math"></a>
+                <!-- Item 3 -->
+                <div class="portfolio-item edu_games" data-category="edu_games" data-aos="fade-up" data-aos-delay="100">
+                    <a href="https://ajnugraha.github.io/kuispanjangberat3/" title="F1 Race Math" target="_blank">
+                        <img src="https://ajnugraha.carrd.co/assets/images/image08.jpg?v=f34bde93" alt="F1 Race Math">
+                    </a>
                     <div class="portfolio-info">
+                        <span class="category-tag">Edu Games</span>
                         <h3>F1 Race Math</h3>
-                      <p>Mata Pelajaran: Matematika<br/>Kelas/Fase: III/B<br/>Materi: Pengukuran Panjang dan Berat</p>
-                        <span class="category">Edu Games</span>
+                        <p>Matematika - Kelas III/B<br>Pengukuran Panjang dan Berat</p>
                     </div>
                 </div>
-                <!-- Item 4: Edu Games -->
-                <div class="portfolio-item edu_games" data-aos="zoom-in" data-aos-delay="350">
-                    <a href="https://script.google.com/a/macros/guru.sd.belajar.id/s/AKfycbwVKdOWEY_RTsktNzWKa_EMoPv-oHgLUAhN2JIvgLkwTkatBuQO0ge5cF_rEuu72Ia9/exec" title="Tic tac toe Pengukuran" target="_blank"><img src="https://ajnugraha.carrd.co/assets/images/image07.jpg?v=f34bde93" alt="Tic tac toe Pengukuran"></a>
+                <!-- Item 4 -->
+                <div class="portfolio-item edu_games" data-category="edu_games" data-aos="fade-up" data-aos-delay="150">
+                    <a href="https://script.google.com/a/macros/guru.sd.belajar.id/s/AKfycbwVKdOWEY_RTsktNzWKa_EMoPv-oHgLUAhN2JIvgLkwTkatBuQO0ge5cF_rEuu72Ia9/exec" title="Tic tac toe Pengukuran" target="_blank">
+                        <img src="https://ajnugraha.carrd.co/assets/images/image07.jpg?v=f34bde93" alt="Tic tac toe Pengukuran">
+                    </a>
                     <div class="portfolio-info">
+                        <span class="category-tag">Edu Games</span>
                         <h3>Tic Tac Toe Pengukuran</h3>
-                      <p>Mata Pelajaran: Matematika<br/>Kelas/Fase: III/B<br/>Materi: Pengukuran Panjang dan Berat</p>
-                        <span class="category">Edu Games</span>
+                        <p>Matematika - Kelas III/B<br>Pengukuran Panjang dan Berat</p>
                     </div>
                 </div>
-                <!-- Item 5: Edu Games -->
-                <div class="portfolio-item edu_games" data-aos="zoom-in" data-aos-delay="350">
-                    <a href="https://script.google.com/a/macros/guru.sd.belajar.id/s/AKfycbyZCifLtGPlUSreyP7zFFeECYXnJ9BZzC_a-vh1eh7ZM90x3wa09D9SKdALwU-esJwFpA/exec" title="balap dayung ekosistem" target="_blank"><img src="https://ajnugraha.carrd.co/assets/images/image03.jpg?v=f34bde93" alt="balap dayung ekosistem"></a>
+                <!-- Item 5 -->
+                <div class="portfolio-item edu_games" data-category="edu_games" data-aos="fade-up" data-aos-delay="200">
+                    <a href="https://script.google.com/a/macros/guru.sd.belajar.id/s/AKfycbyZCifLtGPlUSreyP7zFFeECYXnJ9BZzC_a-vh1eh7ZM90x3wa09D9SKdALwU-esJwFpA/exec" title="balap dayung ekosistem" target="_blank">
+                        <img src="https://ajnugraha.carrd.co/assets/images/image03.jpg?v=f34bde93" alt="balap dayung ekosistem">
+                    </a>
                     <div class="portfolio-info">
+                        <span class="category-tag">Edu Games</span>
                         <h3>Balap Dayung Ekosistem</h3>
-                      <p>Mata Pelajaran: IPAS<br/>Kelas/Fase: III/B<br/>Materi: Ekosistem</p>
-                        <span class="category">Edu Games</span>
+                        <p>IPAS - Kelas III/B<br>Materi: Ekosistem</p>
                     </div>
                 </div>
-                <!-- Item 6: Practice -->
-                <div class="portfolio-item practice" data-aos="zoom-in" data-aos-delay="350">
-                    <a href="https://ajnugraha.github.io/kuisenergi3/" title="Master Of Energy" target="_blank"><img src="https://ajnugraha.carrd.co/assets/images/image05.jpg?v=f34bde93" alt="Master of Energy"></a>
+                <!-- Item 6 -->
+                <div class="portfolio-item practice" data-category="practice" data-aos="fade-up" data-aos-delay="250">
+                    <a href="https://ajnugraha.github.io/kuisenergi3/" title="Master Of Energy" target="_blank">
+                        <img src="https://ajnugraha.carrd.co/assets/images/image05.jpg?v=f34bde93" alt="Master of Energy">
+                    </a>
                     <div class="portfolio-info">
+                        <span class="category-tag">Practice</span>
                         <h3>Master of Energy</h3>
-                      <p>Mata Pelajaran: IPAS<br/>Kelas/Fase: III/B<br/>Materi: Energi dan Perubahannya</p>
-                        <span class="category">Practice</span>
+                        <p>IPAS - Kelas III/B<br>Energi dan Perubahannya</p>
                     </div>
                 </div>
-                <!-- Item 7: Practice -->
-                <div class="portfolio-item practice" data-aos="zoom-in" data-aos-delay="350">
-                    <a href="https://script.google.com/a/macros/guru.sd.belajar.id/s/AKfycbyNSiCuwH3WFJzPda0Ht7PWbCQBforCRh-GfEmPbPIDlIeqKbaQDfWPj_Q3zkrTCLep4g/exec" title="Bubbles Times" target="_blank"><img src="https://ajnugraha.carrd.co/assets/images/image10.jpg?v=f34bde93" alt="Bubbles TImes"></a>
+                <!-- Item 7 -->
+                <div class="portfolio-item practice" data-category="practice" data-aos="fade-up" data-aos-delay="300">
+                    <a href="https://script.google.com/a/macros/guru.sd.belajar.id/s/AKfycbyNSiCuwH3WFJzPda0Ht7PWbCQBforCRh-GfEmPbPIDlIeqKbaQDfWPj_Q3zkrTCLep4g/exec" title="Bubbles Times" target="_blank">
+                        <img src="https://ajnugraha.carrd.co/assets/images/image10.jpg?v=f34bde93" alt="Bubbles TImes">
+                    </a>
                     <div class="portfolio-info">
+                        <span class="category-tag">Practice</span>
                         <h3>Bubbles Times</h3>
-                      <p>Mata Pelajaran: Matematika<br/>Kelas/Fase: III/B<br/>Materi: Perkalian</p>
-                        <span class="category">Practice</span>
+                        <p>Matematika - Kelas III/B<br>Materi: Perkalian</p>
                     </div>
                 </div>
-                <!-- Item 8: Edu Games -->
-                <div class="portfolio-item edu_games" data-aos="zoom-in" data-aos-delay="350">
-                    <a href="https://script.google.com/macros/s/AKfycbxVC-rR-MNKcu3FmypxmIEGEnkX6nPpiaeOER0_UljuhweS2keWD9Nol3ycPuqV6gb3/exec" title="rebut cepat" target="_blank"><img src="https://ajnugraha.carrd.co/assets/images/image11.jpg?v=f34bde93" alt="rebut cepat"></a>
+                <!-- Item 8 -->
+                <div class="portfolio-item edu_games" data-category="edu_games" data-aos="fade-up" data-aos-delay="350">
+                    <a href="https://script.google.com/macros/s/AKfycbxVC-rR-MNKcu3FmypxmIEGEnkX6nPpiaeOER0_UljuhweS2keWD9Nol3ycPuqV6gb3/exec" title="rebut cepat" target="_blank">
+                        <img src="https://ajnugraha.carrd.co/assets/images/image11.jpg?v=f34bde93" alt="rebut cepat">
+                    </a>
                     <div class="portfolio-info">
+                        <span class="category-tag">Edu Games</span>
                         <h3>Rebut Cepat</h3>
-                      <p>Mata Pelajaran: Pendidikan Pancasila<br/>Kelas/Fase: III/B<br/>Materi: Hak &amp; Kewajiban</p>
-                        <span class="category">Edu Games</span>
+                        <p>Pancasila - Kelas III/B<br>Hak & Kewajiban</p>
                     </div>
                 </div>
-                <!-- Item 9: Edu Games -->
-                <div class="portfolio-item edu_games" data-aos="zoom-in" data-aos-delay="350">
-                    <a href="https://script.google.com/a/macros/guru.sd.belajar.id/s/AKfycbxBWvFNvk_vg9nm6nqztrlggEDVEP5FdZNxCqMrpjK5Pw8nHLel0QqVpMNDzfMdG-w/exec" title="cepat tangkas" target="_blank"><img src="https://ajnugraha.carrd.co/assets/images/image06.jpg?v=f34bde93" alt="cepat tangkas"></a>
+                <!-- Item 9 -->
+                <div class="portfolio-item edu_games" data-category="edu_games" data-aos="fade-up" data-aos-delay="400">
+                    <a href="https://script.google.com/a/macros/guru.sd.belajar.id/s/AKfycbxBWvFNvk_vg9nm6nqztrlggEDVEP5FdZNxCqMrpjK5Pw8nHLel0QqVpMNDzfMdG-w.exec" title="cepat tangkas" target="_blank">
+                        <img src="https://ajnugraha.carrd.co/assets/images/image06.jpg?v=f34bde93" alt="cepat tangkas">
+                    </a>
                     <div class="portfolio-info">
+                        <span class="category-tag">Edu Games</span>
                         <h3>Cepat Tangkas</h3>
-                      <p>Mata Pelajaran: Bahasa Inggris<br/>Kelas/Fase: III/B<br/>Materi: My Family Activities</p>
-                        <span class="category">Edu Games</span>
+                        <p>B. Inggris - Kelas III/B<br>Materi: My Family Activities</p>
                     </div>
                 </div>
-                <!-- Item 10: App -->
-                <div class="portfolio-item app" data-aos="zoom-in" data-aos-delay="350">
-                    <a href="https://script.google.com/macros/s/AKfycbyODpWobmB2tZ7KsxpqRswwKfwYeX6ZpIQWghYB_7jLV-ladoc3BLixnYrxjWOmkQZU/exec" title="jurnal mengajar guru" target="_blank"><img src="https://ajnugraha.carrd.co/assets/images/image09.jpg?v=f34bde93" alt="jurnal mengajar guru"></a>
+                <!-- Item 10 -->
+                <div class="portfolio-item app" data-category="app" data-aos="fade-up" data-aos-delay="450">
+                    <a href="https://script.google.com/macros/s/AKfycbyODpWobmB2tZ7KsxpqRswwKfwYeX6ZpIQWghYB_7jLV-ladoc3BLixnYrxjWOmkQZU/exec" title="jurnal mengajar guru" target="_blank">
+                        <img src="https://ajnugraha.carrd.co/assets/images/image09.jpg?v=f34bde93" alt="jurnal mengajar guru">
+                    </a>
                     <div class="portfolio-info">
+                        <span class="category-tag">App</span>
                         <h3>Jurnal Mengajar Guru</h3>
-                      <p>Deskripsi:<br/>Jurnal Mengajar Guru</p>
-                        <span class="category">App</span>
+                        <p>Deskripsi:<br/>Jurnal Mengajar Guru</p>
                     </div>
                 </div>
-                <!-- Item 11: App -->
-                <div class="portfolio-item app" data-aos="zoom-in" data-aos-delay="350">
-                    <a href="https://albanira2.edgeone.dev/" title="Alat Bantu Nilai Erapor" target="_blank"><img src="https://intact-ivory-qd3alhvxai-6k1voun94t.edgeone.dev/Screenshot%202025-12-05%20175421.png" alt="alat bantu nilai erapor"></a>
+                <!-- Item 11 -->
+                <div class="portfolio-item app" data-category="app" data-aos="fade-up" data-aos-delay="500">
+                    <a href="https://albanira2.edgeone.dev/" title="Alat Bantu Nilai Erapor" target="_blank">
+                        <img src="https://intact-ivory-qd3alhvxai-6k1voun94t.edgeone.dev/Screenshot%202025-12-05%20175421.png" alt="alat bantu nilai erapor">
+                    </a>
                     <div class="portfolio-info">
+                        <span class="category-tag">App</span>
                         <h3>Alat Bantu Nilai Erapor</h3>
-                      <p>Deskripsi:<br/>Alat Bantu Nilai untuk memasukkan kode T atau R dalam aplikasi erapor</p>
-                        <span class="category">App</span>
+                        <p>Deskripsi:<br/>Alat Bantu Nilai untuk memasukkan kode T atau R dalam aplikasi erapor</p>
                     </div>
                 </div>
-                <!-- Item 12: App -->
-                <div class="portfolio-item app" data-aos="zoom-in" data-aos-delay="350">
-                    <a href="https://ajnugraha.github.io/generatorcatatanwalas/" title="Generator Catatan Walas" target="_blank"><img src="https://api.imghippo.com/files/xVJs2172m.png" alt="Generator Catatan Walas"></a>
+                <!-- Item 12 -->
+                <div class="portfolio-item app" data-category="app" data-aos="fade-up" data-aos-delay="550">
+                    <a href="https://ajnugraha.github.io/generatorcatatanwalas/" title="Generator Catatan Walas" target="_blank">
+                        <img src="https://api.imghippo.com/files/xVJs2172m.png" alt="Generator Catatan Walas">
+                    </a>
                     <div class="portfolio-info">
+                        <span class="category-tag">App</span>
                         <h3>Generator Catatan Walas</h3>
-                      <p>Deskripsi:<br/>Alat bantu guru dalam membuat catatan walikelas di aplikasi erapor secara cepat dan mudah, namun tetap sesuai dengan keadaan murid sesungguhnya. Dilengkapi dengan bahasa Ai yang formal dan Humanis.</p>
-                        <span class="category">App</span>
+                        <p>Deskripsi:<br/>Alat bantu guru dalam membuat catatan walikelas di aplikasi erapor secara cepat dan mudah, namun tetap sesuai dengan keadaan murid sesungguhnya. Dilengkapi dengan bahasa Ai yang formal dan Humanis.</p>
                     </div>
                 </div>
-                <!-- Item 13: App -->
-                <div class="portfolio-item app" data-aos="zoom-in" data-aos-delay="350">
-                    <a href="https://ongga.edgeone.dev/" title="Ongga App" target="_blank"><img src="https://considerable-teal-tevfrxrqf0-uvtebz2xir.edgeone.dev/Screenshot%202025-12-08%20225033.png" alt="Ongga App"></a>
+                <!-- Item 13 -->
+                <div class="portfolio-item app" data-category="app" data-aos="fade-up" data-aos-delay="600">
+                    <a href="https://ongga.edgeone.dev/" title="Ongga App" target="_blank">
+                        <img src="https://considerable-teal-tevfrxrqf0-uvtebz2xir.edgeone.dev/Screenshot%202025-12-08%20225033.png" alt="Ongga App">
+                    </a>
                     <div class="portfolio-info">
+                        <span class="category-tag">App</span>
                         <h3>Ongga App</h3>
-                      <p>Deskripsi:<br/>Ongga berasal dari bahasa madura yang berarti "Naik"</p>
-                        <span class="category">App</span>
+                        <p>Deskripsi:<br/>Ongga berasal dari bahasa madura yang berarti "Naik"</p>
                     </div>
                 </div>
-                <!-- Item 14: App -->
-                <div class="portfolio-item app" data-aos="zoom-in" data-aos-delay="350">
-                    <a href="https://stationrotationplanner.edgeone.dev/" title="Station Rotation Planner App" target="_blank"><img src="https://surviving-aquamarine-148aqh0zzw-x9ziqcpsc2.edgeone.dev/Screenshot_20251223_192005_com.microsoft.emmx.png" alt="Station Rotation Planner App"></a>
+                <!-- Item 14 -->
+                <div class="portfolio-item app" data-category="app" data-aos="fade-up" data-aos-delay="650">
+                    <a href="https://stationrotationplanner.edgeone.dev/" title="Station Rotation Planner App" target="_blank">
+                        <img src="https://surviving-aquamarine-148aqh0zzw-x9ziqcpsc2.edgeone.dev/Screenshot_20251223_192005_com.microsoft.emmx.png" alt="Station Rotation Planner App">
+                    </a>
                     <div class="portfolio-info">
+                        <span class="category-tag">App</span>
                         <h3>Station Rotation Planner App</h3>
-                      <p>Deskripsi:<br/>Alat bantu untuk membantu guru bertenaga Ai untuk membuat perencanaan pembelajaran dengan strategi Station Rotation untuk memaksimalkan Papan Interaktif Digital di Sekolah yang berkesadaran, bermakna, dan menyenangkan untuk murid.</p>
-                        <span class="category">App</span>
+                        <p>Deskripsi:<br/>Alat bantu untuk membantu guru bertenaga Ai untuk membuat perencanaan pembelajaran dengan strategi Station Rotation untuk memaksimalkan Papan Interaktif Digital di Sekolah yang berkesadaran, bermakna, dan menyenangkan untuk murid.</p>
                     </div>
                 </div>
-                <!-- Item 15: App -->
-                <div class="portfolio-item app" data-aos="zoom-in" data-aos-delay="350">
-                    <a href="https://layananarsipsurat.netlify.app/" title="Laras App" target="_blank"><img src="https://ibb.co.com/gZ83CvqZ" alt="Laras App"></a>
+                <!-- Item 15 -->
+                <div class="portfolio-item app" data-category="app" data-aos="fade-up" data-aos-delay="700">
+                    <a href="https://layananarsipsurat.netlify.app/" title="Laras App" target="_blank">
+                        <img src="https://ibb.co.com/gZ83CvqZ" alt="Laras App">
+                    </a>
                     <div class="portfolio-info">
+                        <span class="category-tag">App</span>
                         <h3>LARAS (Layanan Arsip Surat)</h3>
-                      <p>Deskripsi:<br/>Aplikasi arsiparis persuratan sekolah sebagai pendamping srikandi yang dkhususkan surat yang tidak masuk di srikandi.</p>
-                        <span class="category">App</span>
+                        <p>Deskripsi:<br/>Aplikasi arsiparis persuratan sekolah sebagai pendamping srikandi yang dkhususkan surat yang tidak masuk di srikandi.</p>
                     </div>
                 </div>
             </div>
@@ -271,8 +645,8 @@
 
     <!-- ========= FOOTER ========= -->
     <footer>
-        <div class="footer-container">
-            <div class="social-links">
+        <div class="container">
+            <div style="margin-bottom: 20px; display:flex; justify-content:center; gap:20px; font-size:1.2rem; color:var(--text-main);">
                 <a href="#"><i class="fab fa-instagram"></i></a>
                 <a href="#"><i class="fab fa-whatsapp"></i></a>
                 <a href="#"><i class="fab fa-github"></i></a>
@@ -286,9 +660,51 @@
     <script>
         // ========= INISIALISASI AOS =========
         AOS.init({
-            duration: 1000,
+            duration: 800,
             once: true,
+            offset: 50,
+            easing: 'ease-out-cubic'
         });
+
+        // ========= TYPING EFFECT SCRIPT =========
+        const textElement = document.getElementById('typing-text');
+        const phrases = [
+            "humble.",
+            "modest.",
+            "simple.",
+            "unassuming."
+        ];
+        let phraseIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        let typeSpeed = 100;
+
+        function type() {
+            const currentPhrase = phrases[phraseIndex];
+            
+            if (isDeleting) {
+                textElement.textContent = currentPhrase.substring(0, charIndex - 1);
+                charIndex--;
+                typeSpeed = 50; 
+            } else {
+                textElement.textContent = currentPhrase.substring(0, charIndex + 1);
+                charIndex++;
+                typeSpeed = 100;
+            }
+
+            if (!isDeleting && charIndex === currentPhrase.length) {
+                isDeleting = true;
+                typeSpeed = 2000; 
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                phraseIndex = (phraseIndex + 1) % phrases.length;
+                typeSpeed = 500; 
+            }
+
+            setTimeout(type, typeSpeed);
+        }
+
+        document.addEventListener('DOMContentLoaded', type);
 
         // ========= LOGIKA FILTER PORTOFOLIO =========
         const filterButtons = document.querySelectorAll('.filter-btn');
@@ -296,28 +712,65 @@
 
         filterButtons.forEach(button => {
             button.addEventListener('click', () => {
-                // Hapus class 'active' dari semua tombol
                 filterButtons.forEach(btn => btn.classList.remove('active'));
-                // Tambahkan class 'active' ke tombol yang diklik
                 button.classList.add('active');
 
                 const filterValue = button.getAttribute('data-filter');
 
                 portfolioItems.forEach(item => {
-                    if (filterValue === 'all' || item.classList.contains(filterValue)) {
-                        item.style.display = 'block';
-                        // Refresh animasi AOS
-                        item.classList.remove('aos-animate');
+                    item.classList.remove('aos-animate'); 
+                    
+                    if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
+                        item.style.display = 'flex';
                         setTimeout(() => {
                             item.classList.add('aos-animate');
-                        }, 100);
+                        }, 50);
                     } else {
                         item.style.display = 'none';
                     }
                 });
             });
         });
-    </script>
 
+        // ========= FIXED CUSTOM CURSOR & AMBIENT LIGHT SCRIPT =========
+        const cursorDot = document.getElementById('cursor-dot');
+        const cursorOutline = document.getElementById('cursor-outline');
+        const ambientLight = document.getElementById('ambient-light');
+
+        // Event listener untuk gerakan mouse
+        window.addEventListener('mousemove', function(e) {
+            const posX = e.clientX;
+            const posY = e.clientY;
+
+            // 1. Pindahkan Titik (Dot) langsung ke posisi mouse (Instan)
+            cursorDot.style.transform = `translate(${posX}px, ${posY}px) translate(-50%, -50%)`;
+
+            // 2. Pindahkan Lingkaran (Outline) ke posisi mouse (Transisi ditangani oleh CSS)
+            cursorOutline.style.transform = `translate(${posX}px, ${posY}px) translate(-50%, -50%)`;
+
+            // 3. Pindahkan Cahaya Ambient
+            ambientLight.style.left = `${posX}px`;
+            ambientLight.style.top = `${posY}px`;
+        });
+
+        // Efek saat hover pada Link/Tombol
+        document.querySelectorAll('a, button, .portfolio-item').forEach(link => {
+            link.addEventListener('mouseenter', () => {
+                // Perbesar outline
+                cursorOutline.style.width = '60px';
+                cursorOutline.style.height = '60px';
+                cursorOutline.style.backgroundColor = 'rgba(37, 99, 235, 0.1)';
+                cursorOutline.style.borderColor = 'transparent';
+            });
+            link.addEventListener('mouseleave', () => {
+                // Kembali ke ukuran semula
+                cursorOutline.style.width = '40px';
+                cursorOutline.style.height = '40px';
+                cursorOutline.style.backgroundColor = 'transparent';
+                cursorOutline.style.borderColor = 'var(--text-muted)';
+            });
+        });
+
+    </script>
 </body>
 </html>
